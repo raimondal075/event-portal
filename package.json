@@ -1,0 +1,15 @@
+{
+  "name": "santa-soiree-2026",
+  "version": "1.0.0",
+  "description": "Santa Soirée 2026 event portal — Node.js server + Firebase (no React)",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "deploy": "firebase deploy"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,116 @@
+rules_version = '2';
+
+// Santa Soirée 2026 — Firestore security rules
+// Deploy with:  firebase deploy --only firestore:rules
+// or paste into Firebase console → Firestore Database → Rules → Publish.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ⚠️ STEP 2 — the SAME organizer emails as in firebase-config.js, all lowercase.
+    function adminEmails() {
+      return ['your.admin.raimondal075@gmail.com'];
+    }
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Organizers must have a verified email (Google sign-in is verified automatically).
+    function isAdmin() {
+      return signedIn()
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.lower() in adminEmails();
+    }
+
+    function cfg() {
+      return get(/databases/$(database)/documents/settings/main).data;
+    }
+
+    function eventIds() {
+      return ['FB', 'SK', 'AA', 'RL'];
+    }
+
+    // ---------- Site settings: public read, organizers write ----------
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---------- Student profiles ----------
+    function validStudent() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['name', 'email', 'phone', 'year', 'enrollment', 'roll', 'dept',
+                               'section', 'interests', 'interestsOther', 'createdAt', 'updatedAt'])
+        && d.name is string && d.name.size() > 0 && d.name.size() <= 100
+        && d.email is string && d.email == request.auth.token.email.lower()
+        && d.phone is string && d.phone.size() <= 20
+        && d.year is int && d.year >= 1 && d.year <= 4
+        && d.enrollment is string && d.enrollment.size() > 0 && d.enrollment.size() <= 40
+        && d.roll is string && d.roll.size() > 0 && d.roll.size() <= 40
+        && d.dept is string && d.dept.size() > 0 && d.dept.size() <= 60
+        && d.interests is list && d.interests.size() <= 30;
+    }
+
+    // 2nd–4th years must use the institutional domain; 1st years may use personal email if allowed.
+    function emailAllowed() {
+      let s = cfg();
+      let d = request.resource.data;
+      return s.domain == ''
+        || d.email.split('@')[1] == s.domain
+        || (d.year == 1 && s.allowPersonalFirstYear == true);
+    }
+
+    match /students/{uid} {
+      allow read: if (signedIn() && request.auth.uid == uid) || isAdmin();
+      allow create: if signedIn() && request.auth.uid == uid
+        && cfg().signupOpen == true
+        && validStudent() && emailAllowed();
+      allow update: if (signedIn() && request.auth.uid == uid
+          && validStudent() && emailAllowed()
+          && request.resource.data.email == resource.data.email)
+        || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Event registrations (doc id = EVENT_uid → one per student per event) ----------
+    function validRegistration(rid) {
+      let d = request.resource.data;
+      let s = cfg();
+      let ev = s.events[d.event];
+      let st = get(/databases/$(database)/documents/students/$(request.auth.uid)).data;
+      return d.keys().hasOnly(['ticket', 'event', 'studentId', 'name', 'roll', 'enrollment', 'email',
+                               'phone', 'dept', 'year', 'extra', 'mode', 'team', 'members', 'at'])
+        && d.event in eventIds()
+        && rid == d.event + '_' + request.auth.uid
+        && d.studentId == request.auth.uid
+        && d.at == request.time
+        && d.year == st.year
+        && d.mode in ['Individual', 'Team']
+        && d.members is list && d.members.size() <= 10
+        && s.regOpen == true
+        && (s.deadlineAt == null || request.time < s.deadlineAt)
+        && ev.open == true
+        && st.year in ev.years;
+    }
+
+    match /registrations/{rid} {
+      allow read: if (signedIn() && resource.data.studentId == request.auth.uid) || isAdmin();
+      allow create: if signedIn() && validRegistration(rid);
+      allow update: if isAdmin();
+      allow delete: if (signedIn() && resource.data.studentId == request.auth.uid && cfg().regOpen == true)
+        || isAdmin();
+    }
+
+    // ---------- Public seat counters (no personal data) ----------
+    match /seats/{sid} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['event', 'at'])
+        && sid == request.resource.data.event + '_' + request.auth.uid
+        && existsAfter(/databases/$(database)/documents/registrations/$(sid));
+      allow delete: if (signedIn() && sid == resource.data.event + '_' + request.auth.uid)
+        || isAdmin();
+    }
+  }
+}

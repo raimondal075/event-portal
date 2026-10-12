@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Santa Soirée 2026 · CSE AIML</title>
+<meta name="description" content="Santa Soirée 2026 — a celebration of coding, gaming, design and innovation by the Department of CSE AIML. 20 December 2026, Genesis Building.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="logo">🎅 Santa <span>Soirée</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#/foryou">✨ For You</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle light or dark theme">🌙</button>
+      <a href="#/login" class="btn btn-ghost btn-sm nav-user" id="accountBtn">Sign in</a>
+      <a href="#/signup" class="btn btn-primary btn-sm" id="ctaBtn">Create account</a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="sys-banner" id="sysBanner" role="status" hidden></div>
+<main>
+<!-- ================= HOME ================= -->
+<div data-view="home">
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Department of CSE AIML presents</span>
+        <h1>Santa <em>Soirée</em> 2026</h1>
+        <p class="tagline"><strong>Celebrate. Create. Innovate.</strong> One festive day of coding, gaming, digital art and bold ideas.</p>
+        <div class="chips">
+          <span class="chip">📅 20 December 2026</span>
+          <span class="chip">📍 Genesis Building</span>
+          <span class="chip">⏰ 10 AM – 8 PM</span>
+        </div>
+        <div class="hero-cta">
+          <a href="#events" class="btn btn-primary">Explore events →</a>
+          <a href="#/foryou" class="btn btn-ghost">✨ Find events for me</a>
+        </div>
+        <div class="countdown" aria-live="polite">
+          <div class="cd"><strong id="days">00</strong><small>Days</small></div>
+          <div class="cd"><strong id="hours">00</strong><small>Hours</small></div>
+          <div class="cd"><strong id="minutes">00</strong><small>Mins</small></div>
+          <div class="cd"><strong id="seconds">00</strong><small>Secs</small></div>
+        </div>
+        <p id="cdMessage">❄️ The festive countdown has begun.</p>
+      </div>
+      <div class="tree-wrap" aria-hidden="true">
+        <div class="tree" id="tree">
+          <div class="star">⭐</div>
+          <div class="tier t1"></div><div class="tier t2"></div><div class="tier t3"></div>
+          <div class="trunk"></div>
+          <div class="gift" style="left:6px;width:48px;height:40px;background:#e5484d"></div>
+          <div class="gift" style="right:10px;width:42px;height:34px;background:#3d7fd9"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap reveal">
+    <div class="stats">
+      <div class="stat"><strong>4</strong><span>Competitions</span></div>
+      <div class="stat"><strong>10</strong><span>Hours of fun</span></div>
+      <div class="stat"><strong id="statSeats">—</strong><span>Seats left</span></div>
+      <div class="stat"><strong id="statRegs">0</strong><span>Registrations</span></div>
+    </div>
+  </div>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">About the fest</span>
+        <h2>A stage for every kind of talent</h2>
+        <p>Santa Soirée promotes teamwork, coding, gaming, graphic design and innovation, giving students a platform to showcase their creativity and technical skills through exciting competitions.</p>
+      </div>
+      <div class="about-grid">
+        <div class="panel reveal">
+          <h3>🎯 Event objectives</h3>
+          <p>Bring students from 1st to 4th year together to collaborate, compete and celebrate. Whether you write code, design art, build models or dominate in games, there's an event made for you, and the day ends with a closing ceremony for everyone.</p>
+          <div class="steps">
+            <div><b>1</b><span>Create your student account</span></div>
+            <div><b>2</b><span>Tell us your interests</span></div>
+            <div><b>3</b><span>Register &amp; get your ticket</span></div>
+          </div>
+        </div>
+        <div class="panel reveal">
+          <h3>👨‍🏫 Faculty &amp; coordinators</h3>
+          <div class="people">
+            <div class="person"><div class="avatar">AS</div><div><b>Dr. Amartya Sengupta</b><small>HOD &amp; Event Lead</small></div></div>
+            <div class="person"><div class="avatar">PM</div><div><b>Prof. Piyali Mukherjee</b><small>Faculty Coordinator</small></div></div>
+            <div class="person"><div class="avatar">VK</div><div><b>Prof. Vivekananda Kundu</b><small>Faculty Coordinator</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="events">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Competitions</span>
+        <h2>Pick your challenge</h2>
+        <p>Sign in once, then register for any event in a single tap. Your ticket is generated instantly.</p>
+      </div>
+      <div id="recStrip"></div>
+      <div class="toolbar reveal">
+        <div class="filters" role="group" aria-label="Filter events">
+          <button class="filter" data-cat="all" aria-pressed="true">All</button>
+          <button class="filter" data-cat="coding" aria-pressed="false">💻 Coding</button>
+          <button class="filter" data-cat="gaming" aria-pressed="false">🎮 Gaming</button>
+          <button class="filter" data-cat="creativity" aria-pressed="false">🎨 Creativity</button>
+          <button class="filter" data-cat="innovation" aria-pressed="false">🚀 Innovation</button>
+        </div>
+        <label class="search"><input type="search" id="search" placeholder="Search events…" aria-label="Search events"></label>
+      </div>
+      <div class="events" id="eventGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="schedule">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">20 December 2026</span>
+        <h2>The day at a glance</h2>
+        <p>All events take place at the Genesis Building. Status updates live on the day.</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Questions</span>
+        <h2>Frequently asked</h2>
+      </div>
+      <div class="faq reveal">
+        <details><summary>Who can participate?</summary><p>Students from 1st to 4th year. Some events may be limited to certain years; each event card shows who it's open to.</p></details>
+        <details><summary>Which email should I use to create my account?</summary><p>2nd, 3rd and 4th year students must use their institutional email. 1st year students can use a personal email if they don't have an institutional one yet.</p></details>
+        <details><summary>Can I register for more than one event?</summary><p>Yes. Events run in separate time slots, so you can join as many as you like. Each registration gets its own ticket ID.</p></details>
+        <details><summary>Can I participate solo in FrostByte or the Innovation Lab?</summary><p>Yes. Both events allow individual or team entries. Choose "Team" in the registration form to add a team name and members.</p></details>
+        <details><summary>I forgot my password. What do I do?</summary><p>Tap “Forgot password?” on the sign-in page and we'll email you a reset link. You can also ask the coordinators to send one.</p></details>
+        <details><summary>What should I bring on the day?</summary><p>Your college ID card and your ticket ID. For FrostByte and Aurora ArtFest, bring your own laptop if you have one.</p></details>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SIGN UP / EDIT PROFILE ================= -->
+<section class="section page" data-view="signup" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <span class="eyebrow" id="signupEyebrow">Student account</span>
+      <h1 id="signupTitle">Create your account</h1>
+      <p id="signupLead">One account for all Santa Soirée events. Your details are filled in automatically whenever you register.</p>
+    </div>
+    <form class="form-card" id="signupForm" novalidate></form>
+  </div>
+</section>
+
+<!-- ================= LOGIN ================= -->
+<section class="section page" data-view="login" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <span class="eyebrow">Welcome back</span>
+      <h1>Sign in</h1>
+      <p>Use the email and password you registered with.</p>
+    </div>
+    <form class="form-card narrow" id="loginForm" novalidate>
+      <div class="field"><label for="l-id">Email</label><input id="l-id" name="id" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="l-pw">Password</label><input id="l-pw" name="pw" type="password" autocomplete="current-password" required></div>
+      <p class="form-error" id="loginError" aria-live="assertive"></p>
+      <button class="btn btn-primary" id="loginBtn" style="width:100%">Sign in</button>
+      <p class="note" style="margin-top:16px;text-align:center">New here? <a href="#/signup">Create an account</a> · <button type="button" class="link-btn" id="forgotBtn">Forgot password?</button></p>
+    </form>
+  </div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section class="section page" data-view="profile" hidden>
+  <div class="wrap" id="profileBody"></div>
+</section>
+
+<!-- ================= FOR YOU ================= -->
+<section class="section page" data-view="foryou" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <span class="eyebrow">Only for you</span>
+      <h1>Events that match <em class="grad">your interests</em></h1>
+      <p>Type what you're into, or tap a few tags. We'll match you with the Santa Soirée events that fit you best.</p>
+    </div>
+    <form class="form-card" id="fyForm">
+      <div class="field"><label>Pick your interests</label><div class="tags" id="fyTags"></div></div>
+      <div class="field"><label for="fyText">Anything else? Type freely</label><textarea id="fyText" placeholder="e.g. I love Python, building robots and making posters"></textarea></div>
+      <label class="switch" id="fySaveWrap" hidden><input type="checkbox" id="fySave" checked> Save these interests to my profile</label>
+      <button class="btn btn-primary" style="margin-top:16px">✨ Show my events</button>
+    </form>
+    <div id="fyResults" style="margin-top:36px"></div>
+  </div>
+</section>
+
+<!-- ================= ADMIN ================= -->
+<section class="section page" data-view="admin" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <span class="eyebrow">Organizers only</span>
+      <h1>Admin panel</h1>
+    </div>
+    <div id="adminBody"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <h2>✨ Celebrate · Create · Innovate</h2>
+      <p>One celebration. Four events. Endless possibilities. Made with ❤️ by CSE AIML.</p>
+    </div>
+    <div class="foot-links">
+      <a href="#events" class="btn btn-primary btn-sm">Register</a>
+      <button class="btn btn-ghost btn-sm" onclick="window.print()">🖨️ Print schedule</button>
+      <a href="#/admin" class="btn btn-ghost btn-sm">🔐 Organizers</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Event registration -->
+<dialog id="regDialog" aria-labelledby="regTitle">
+  <div class="dlg-head"><h2 id="regTitle">Register</h2><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <form class="dlg-body" id="regForm" novalidate></form>
+</dialog>
+
+<!-- Ticket -->
+<dialog id="ticketDialog" aria-labelledby="ticketTitle">
+  <div class="dlg-head"><h2 id="ticketTitle">Your ticket 🎟️</h2><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <div class="dlg-body" id="ticketBody"></div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="firebase-config.js"></script>
+<script src="app.js"></script>
+<noscript><p style="text-align:center;padding:20px">Please enable JavaScript to register for Santa Soirée.</p></noscript>
+</body>
+</html>
